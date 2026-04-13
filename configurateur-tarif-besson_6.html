@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarif 2026 — Le Besson</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --green: #1a3a2a;
+    --green-mid: #2d5c42;
+    --green-light: #4a8c64;
+    --accent: #c8a84b;
+    --accent-light: #e8cc7a;
+    --bg: #f5f2ec;
+    --bg-card: #ffffff;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --border: #ddd8ce;
+    --radius: 4px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--green);
+    color: white;
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--accent);
+  }
+  .header-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: white;
+  }
+  .header-logo span { color: var(--accent); }
+  .header-meta {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+    text-align: right;
+  }
+
+  /* MAIN */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* INTRO */
+  .intro {
+    margin-bottom: 36px;
+  }
+  .intro h1 {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .intro p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* STEP */
+  .step {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .step.hidden { display: none; }
+  .step.active { border-color: var(--green-light); box-shadow: 0 2px 12px rgba(26,58,42,0.08); }
+  .step.done { border-color: var(--border); opacity: 0.75; }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    background: #fafaf8;
+  }
+  .step.active .step-header { background: var(--green); color: white; border-bottom-color: var(--green-mid); }
+  .step.done .step-header { background: #f0f4f1; }
+
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    flex-shrink: 0;
+    color: var(--text-muted);
+  }
+  .step.active .step-num { border-color: var(--accent); color: var(--accent); background: rgba(200,168,75,0.15); }
+  .step.done .step-num { border-color: var(--green-light); color: var(--green-light); background: rgba(74,140,100,0.1); }
+
+  .step-title {
+    font-size: 14px;
+    font-weight: 500;
+    flex: 1;
+  }
+  .step.active .step-title { color: white; }
+  .step.done .step-title { color: var(--green); }
+
+  .step-recap {
+    font-size: 13px;
+    font-family: 'DM Mono', monospace;
+    color: var(--green-light);
+    background: rgba(74,140,100,0.08);
+    padding: 4px 10px;
+    border-radius: 3px;
+    display: none;
+  }
+  .step.done .step-recap { display: block; }
+
+  .step-back {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    background: none; border: none;
+    text-decoration: underline;
+    font-family: 'DM Sans', sans-serif;
+    padding: 0;
+    display: none;
+  }
+  .step.active .step-back { display: block; }
+  .step-back:hover { color: white; }
+
+  .step-body {
+    padding: 24px;
+  }
+
+  /* OPTIONS */
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+  }
+  .option-btn {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text);
+    transition: all 0.18s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.4;
+  }
+  .option-btn:hover {
+    border-color: var(--green-light);
+    background: white;
+    color: var(--green);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(26,58,42,0.08);
+  }
+  .option-btn.selected {
+    border-color: var(--green);
+    background: var(--green);
+    color: white;
+  }
+  .option-btn .opt-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .option-btn .opt-text { flex: 1; }
+  .option-btn .opt-sub {
+    font-size: 12px;
+    opacity: 0.65;
+    margin-top: 3px;
+    font-weight: 300;
+  }
+  .option-btn.selected .opt-sub { opacity: 0.75; }
+
+  /* Multi-select */
+  .option-btn.multi { position: relative; padding-right: 44px; }
+  .option-check {
+    position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    color: transparent;
+    transition: all 0.15s;
+  }
+  .option-btn.selected .option-check {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  /* ECOLINE card */
+  .option-btn.ecoline {
+    background: #fffbf0;
+    border-color: #e8cc7a;
+  }
+  .option-btn.ecoline:hover {
+    background: #fff8e6;
+    border-color: var(--accent);
+  }
+  .option-btn.ecoline.selected {
+    background: #7a6020;
+    border-color: #7a6020;
+    color: white;
+  }
+
+  /* Grid CHOIX 4 — grille uniforme, ECOLINE en dernier */
+  .ref-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .ref-options-grid .ref-group,
+  .ref-options-grid .ref-group-ecoline {
+    display: contents;
+  }
+
+  /* Badge "2 tarifs" sur la carte */
+  .multi-tarif-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    background: rgba(26,58,42,0.08);
+    color: var(--green);
+    border: 1px solid rgba(26,58,42,0.15);
+    border-radius: 20px;
+    padding: 2px 8px;
+    margin-top: 5px;
+  }
+
+  /* VALIDATE BTN */
+  .validate-btn {
+    margin-top: 18px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    padding: 12px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.18s;
+    display: none;
+  }
+  .validate-btn:hover { background: var(--green-mid); }
+  .validate-btn.visible { display: inline-flex; align-items: center; gap: 8px; }
+
+  /* MARQUAGE NOTICE */
+  .marquage-notice {
+    display: none;
+    margin-bottom: 18px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .marquage-notice.visible { display: block; }
+  .marquage-row {
+    display: flex;
+    gap: 0;
+  }
+  .marquage-item {
+    flex: 1;
+    padding: 14px 16px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .marquage-item.laser-item {
+    background: rgba(26,58,42,0.06);
+    border-right: 1px solid var(--border);
+  }
+  .marquage-item.ink-item {
+    background: rgba(200,168,75,0.07);
+  }
+  .marquage-item.full-width {
+    border-right: none;
+  }
+  .marquage-item strong {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+    margin-bottom: 5px;
+    color: var(--green);
+  }
+  .marquage-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-laser { background: var(--green); }
+  .dot-ink { background: var(--accent); }
+
+  /* RESULT TABLE */
+  .result-section { display: none; }
+  .result-section.visible { display: block; }
+
+  .result-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .result-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .result-table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .result-group-title {
+    padding: 10px 16px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.06em;
+    color: white;
+    background: var(--green-mid);
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .rgt-laser { background: var(--green); }
+  .rgt-ink { background: #8b6914; }
+  .rgt-badge {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead th {
+    background: #f5f2ec;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  thead th:nth-child(3),
+  thead th:nth-child(4),
+  thead th:nth-child(5) { text-align: right; }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #fafaf8; }
+  tbody td {
+    padding: 10px 14px;
+    color: var(--text);
+    vertical-align: middle;
+  }
+  tbody td:nth-child(3),
+  tbody td:nth-child(4),
+  tbody td:nth-child(5) {
+    text-align: right;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+  }
+  td.ref-cell {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    width: 100px;
+  }
+  td.label-cell { font-weight: 400; max-width: 280px; }
+  td.remise-cell { color: var(--green-light); }
+  td.prix-cell { font-weight: 600; color: var(--green); }
+  td.qty-cell {}
+
+  /* Ecoline badge */
+  .ecoline-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    background: rgba(200,168,75,0.15);
+    color: #7a6020;
+    border: 1px solid rgba(200,168,75,0.4);
+    border-radius: 20px;
+    padding: 2px 8px;
+    margin-top: 3px;
+  }
+
+  /* FOOTNOTE */
+  .footnote {
+    margin-top: 32px;
+    padding: 14px 18px;
+    background: rgba(26,58,42,0.04);
+    border-left: 3px solid var(--green-light);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--green-light));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* RESET */
+  .reset-btn {
+    margin-top: 20px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 9px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .reset-btn:hover { border-color: var(--green); color: var(--green); }
+
+  @media (max-width: 640px) {
+    .header { padding: 14px 18px; }
+    .main { padding: 24px 14px 60px; }
+    .options-grid { grid-template-columns: 1fr; }
+    .marquage-row { flex-direction: column; }
+    .marquage-item:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-logo">LE <span>BESSON</span></div>
+  <div class="header-meta">TARIF 2026 — H.T.<br>Prix publics conseillés</div>
+</div>
+
+<div class="main">
+  <div class="intro">
+    <h1>Configurateur de tarif</h1>
+    <p>Répondez aux questions ci-dessous pour accéder aux prix correspondant à votre besoin.</p>
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+  </div>
+
+  <!-- ÉTAPE 1 : Univers -->
+  <div class="step active" id="step1">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Quel est votre univers de traçabilité ?</div>
+      <div class="step-recap" id="recap1"></div>
+      <button class="step-back" onclick="goBack(1)">← Modifier</button>
+    </div>
+    <div class="step-body">
+      <div class="options-grid">
+        <button class="option-btn" onclick="selectUnivers('standard')">
+          <span class="opt-icon">🌲</span>
+          <span class="opt-text">
+            Plaquette d'identification forestière
+            <div class="opt-sub">Traçabilité standard — Exploitants, ONF, entreprises forestières</div>
+          </span>
+        </button>
+        <button class="option-btn" onclick="selectUnivers('biotag')">
+          <span class="opt-icon">🌿</span>
+          <span class="opt-text">
+            Plaquette qualité papetière
+            <div class="opt-sub">Traçabilité conforme aux exigences de l'industrie papetière (BIOTAG)</div>
+          </span>
+        </button>
+        <button class="option-btn" onclick="selectUnivers('plot')">
+          <span class="opt-icon">📍</span>
+          <span class="opt-text">
+            Plot pour identification bois scié
+            <div class="opt-sub">Traçabilité des lots transformés — Scieries</div>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 2 : Caractéristique -->
+  <div class="step hidden" id="step2">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Quelle est la caractéristique principale du marquage ?</div>
+      <div class="step-recap" id="recap2"></div>
+      <button class="step-back" onclick="goBack(2)">← Modifier</button>
+    </div>
+    <div class="step-body">
+      <div class="options-grid" id="caracteristiqueOptions"></div>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 3 : Format -->
+  <div class="step hidden" id="step3">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Quel format de plaquette ?</div>
+      <div class="step-recap" id="recap3"></div>
+      <button class="step-back" onclick="goBack(3)">← Modifier</button>
+    </div>
+    <div class="step-body">
+      <div class="options-grid" id="formatOptions"></div>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 4 : Références -->
+  <div class="step hidden" id="step4">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">Quelle(s) référence(s) souhaitez-vous consulter ?</div>
+      <div class="step-recap" id="recap4"></div>
+      <button class="step-back" onclick="goBack(4)">← Modifier</button>
+    </div>
+    <div class="step-body">
+      <div class="options-grid" id="refOptions"></div>
+      <button class="validate-btn" id="validateBtn" onclick="showResults()">
+        Afficher les tarifs →
+      </button>
+    </div>
+  </div>
+
+  <!-- RÉSULTATS -->
+  <div class="result-section" id="resultSection">
+    <div class="marquage-notice" id="marquageNotice">
+      <div class="marquage-row" id="marquageRow"></div>
+    </div>
+    <div id="resultContent"></div>
+    <div class="footnote">
+      ℹ️ Tarif indicatif — Prix H.T. — Sous réserve de modifications. Ce document ne constitue pas un bon de commande. Les remises sont appliquées sur le prix unitaire × 1 000 plaquettes (× 500 pour les plots), quantité commandée indiquée en colonne Qté.
+    </div>
+    <button class="reset-btn" onclick="resetAll()">↺ Nouvelle recherche</button>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// DONNÉES
+// ============================================================
+const DATA = {
+  "Gamme plaquette standard": [
+    {"ref":"U6025","label":"Plaquette 1 ligne","label_bold":"[GAMME ECOLINE] - Plaquette 1 ligne (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":1,"remise":"--","prix_ht":74.28},
+    {"ref":"U6025","label":"Plaquette 1 ligne","label_bold":"[GAMME ECOLINE] - Plaquette 1 ligne (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":6,"remise":0.05,"prix_ht":70.56},
+    {"ref":"U6025","label":"Plaquette 1 ligne","label_bold":"[GAMME ECOLINE] - Plaquette 1 ligne (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":10,"remise":0.08,"prix_ht":68.33},
+    {"ref":"U6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":1,"remise":"--","prix_ht":89.83},
+    {"ref":"U6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":6,"remise":0.05,"prix_ht":85.34},
+    {"ref":"U6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":10,"remise":0.08,"prix_ht":82.64},
+    {"ref":"U6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":20,"remise":0.12,"prix_ht":79.05},
+    {"ref":"U6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":30,"remise":0.15,"prix_ht":76.35},
+    {"ref":"U6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":40,"remise":0.18,"prix_ht":73.66},
+    {"ref":"U6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":50,"remise":0.2,"prix_ht":71.86},
+    {"ref":"H6025","label":"Plaquette 1 ligne","label_bold":"Plaquette 1 ligne (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":1,"remise":"--","prix_ht":97.61},
+    {"ref":"H6025","label":"Plaquette 1 ligne","label_bold":"Plaquette 1 ligne (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":6,"remise":0.05,"prix_ht":92.73},
+    {"ref":"H6025","label":"Plaquette 1 ligne","label_bold":"Plaquette 1 ligne (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":10,"remise":0.08,"prix_ht":89.8},
+    {"ref":"H6025","label":"Plaquette 1 ligne","label_bold":"Plaquette 1 ligne (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":20,"remise":0.12,"prix_ht":85.9},
+    {"ref":"H6025","label":"Plaquette 1 ligne","label_bold":"Plaquette 1 ligne (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":30,"remise":0.15,"prix_ht":82.97},
+    {"ref":"H6025","label":"Plaquette 1 ligne","label_bold":"Plaquette 1 ligne (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":40,"remise":0.18,"prix_ht":80.04},
+    {"ref":"H6025","label":"Plaquette 1 ligne","label_bold":"Plaquette 1 ligne (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":50,"remise":0.2,"prix_ht":78.09},
+    {"ref":"H6025","label":"Plaquette 1 ligne","label_bold":"Plaquette 1 ligne (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":100,"remise":0.27,"prix_ht":71.25},
+    {"ref":"H6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":1,"remise":"--","prix_ht":110.86},
+    {"ref":"H6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":6,"remise":0.05,"prix_ht":105.32},
+    {"ref":"H6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":10,"remise":0.08,"prix_ht":101.99},
+    {"ref":"H6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":20,"remise":0.12,"prix_ht":97.56},
+    {"ref":"H6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":30,"remise":0.15,"prix_ht":94.23},
+    {"ref":"H6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":40,"remise":0.18,"prix_ht":90.9},
+    {"ref":"H6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":50,"remise":0.2,"prix_ht":88.69},
+    {"ref":"H6040","label":"Plaquette jusqu'à 3 lignes","label_bold":"Plaquette jusqu'à 3 lignes (x 1000)","format":"Format 27","caracteristique":"ALPHANUMERIQUE","qty":100,"remise":0.27,"prix_ht":80.93},
+    {"ref":"H6021","label":"Plaquette 1 ligne + code-barres","label_bold":"Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":1,"remise":"--","prix_ht":123.9},
+    {"ref":"H6021","label":"Plaquette 1 ligne + code-barres","label_bold":"Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":6,"remise":0.05,"prix_ht":117.7},
+    {"ref":"H6021","label":"Plaquette 1 ligne + code-barres","label_bold":"Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":10,"remise":0.08,"prix_ht":113.98},
+    {"ref":"H6021","label":"Plaquette 1 ligne + code-barres","label_bold":"Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":20,"remise":0.12,"prix_ht":109.03},
+    {"ref":"H6021","label":"Plaquette 1 ligne + code-barres","label_bold":"Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":30,"remise":0.15,"prix_ht":105.31},
+    {"ref":"H6021","label":"Plaquette 1 ligne + code-barres","label_bold":"Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":40,"remise":0.18,"prix_ht":101.59},
+    {"ref":"H6021","label":"Plaquette 1 ligne + code-barres","label_bold":"Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":50,"remise":0.2,"prix_ht":99.12},
+    {"ref":"H6021","label":"Plaquette 1 ligne + code-barres","label_bold":"Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":100,"remise":0.27,"prix_ht":90.44},
+    {"ref":"H6024","label":"Plaquette jusqu'à 2 lignes + Logo","label_bold":"Plaquette jusqu'à 2 lignes + Logo (x 1000)","format":"Format 27","caracteristique":"LOGO","qty":1,"remise":"--","prix_ht":123.9},
+    {"ref":"H6024","label":"Plaquette jusqu'à 2 lignes + Logo","label_bold":"Plaquette jusqu'à 2 lignes + Logo (x 1000)","format":"Format 27","caracteristique":"LOGO","qty":6,"remise":0.05,"prix_ht":117.7},
+    {"ref":"H6024","label":"Plaquette jusqu'à 2 lignes + Logo","label_bold":"Plaquette jusqu'à 2 lignes + Logo (x 1000)","format":"Format 27","caracteristique":"LOGO","qty":10,"remise":0.08,"prix_ht":113.98},
+    {"ref":"H6024","label":"Plaquette jusqu'à 2 lignes + Logo","label_bold":"Plaquette jusqu'à 2 lignes + Logo (x 1000)","format":"Format 27","caracteristique":"LOGO","qty":20,"remise":0.12,"prix_ht":109.03},
+    {"ref":"H6024","label":"Plaquette jusqu'à 2 lignes + Logo","label_bold":"Plaquette jusqu'à 2 lignes + Logo (x 1000)","format":"Format 27","caracteristique":"LOGO","qty":30,"remise":0.15,"prix_ht":105.31},
+    {"ref":"H6024","label":"Plaquette jusqu'à 2 lignes + Logo","label_bold":"Plaquette jusqu'à 2 lignes + Logo (x 1000)","format":"Format 27","caracteristique":"LOGO","qty":40,"remise":0.18,"prix_ht":101.59},
+    {"ref":"H6024","label":"Plaquette jusqu'à 2 lignes + Logo","label_bold":"Plaquette jusqu'à 2 lignes + Logo (x 1000)","format":"Format 27","caracteristique":"LOGO","qty":50,"remise":0.2,"prix_ht":99.12},
+    {"ref":"H6024","label":"Plaquette jusqu'à 2 lignes + Logo","label_bold":"Plaquette jusqu'à 2 lignes + Logo (x 1000)","format":"Format 27","caracteristique":"LOGO","qty":100,"remise":0.27,"prix_ht":90.44},
+    {"ref":"H6054","label":"Plaquette avec coupon jusqu'à 3 lignes","label_bold":"Plaquette avec coupon jusqu'à 3 lignes (x 1000)","format":"COUPON","caracteristique":"ALPHANUMERIQUE","qty":1,"remise":"--","prix_ht":130.06},
+    {"ref":"H6054","label":"Plaquette avec coupon jusqu'à 3 lignes","label_bold":"Plaquette avec coupon jusqu'à 3 lignes (x 1000)","format":"COUPON","caracteristique":"ALPHANUMERIQUE","qty":6,"remise":0.05,"prix_ht":123.56},
+    {"ref":"H6054","label":"Plaquette avec coupon jusqu'à 3 lignes","label_bold":"Plaquette avec coupon jusqu'à 3 lignes (x 1000)","format":"COUPON","caracteristique":"ALPHANUMERIQUE","qty":10,"remise":0.08,"prix_ht":119.66},
+    {"ref":"H6054","label":"Plaquette avec coupon jusqu'à 3 lignes","label_bold":"Plaquette avec coupon jusqu'à 3 lignes (x 1000)","format":"COUPON","caracteristique":"ALPHANUMERIQUE","qty":20,"remise":0.12,"prix_ht":114.46},
+    {"ref":"H6054","label":"Plaquette avec coupon jusqu'à 3 lignes","label_bold":"Plaquette avec coupon jusqu'à 3 lignes (x 1000)","format":"COUPON","caracteristique":"ALPHANUMERIQUE","qty":30,"remise":0.15,"prix_ht":110.55},
+    {"ref":"H6054","label":"Plaquette avec coupon jusqu'à 3 lignes","label_bold":"Plaquette avec coupon jusqu'à 3 lignes (x 1000)","format":"COUPON","caracteristique":"ALPHANUMERIQUE","qty":40,"remise":0.18,"prix_ht":106.65},
+    {"ref":"H6054","label":"Plaquette avec coupon jusqu'à 3 lignes","label_bold":"Plaquette avec coupon jusqu'à 3 lignes (x 1000)","format":"COUPON","caracteristique":"ALPHANUMERIQUE","qty":50,"remise":0.2,"prix_ht":104.05},
+    {"ref":"H6054","label":"Plaquette avec coupon jusqu'à 3 lignes","label_bold":"Plaquette avec coupon jusqu'à 3 lignes (x 1000)","format":"COUPON","caracteristique":"ALPHANUMERIQUE","qty":100,"remise":0.27,"prix_ht":94.95},
+    {"ref":"H6051","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":1,"remise":"--","prix_ht":134.12},
+    {"ref":"H6051","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":6,"remise":0.05,"prix_ht":127.41},
+    {"ref":"H6051","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":10,"remise":0.08,"prix_ht":123.39},
+    {"ref":"H6051","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":20,"remise":0.12,"prix_ht":118.02},
+    {"ref":"H6051","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":30,"remise":0.15,"prix_ht":114},
+    {"ref":"H6051","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":40,"remise":0.18,"prix_ht":109.98},
+    {"ref":"H6051","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":50,"remise":0.2,"prix_ht":107.29},
+    {"ref":"H6051","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":100,"remise":0.27,"prix_ht":97.91},
+    {"ref":"H6053","label":"Plaquette avec coupon 2 lignes + logo","label_bold":"Plaquette avec coupon 2 lignes + logo (x 1000)","format":"COUPON","caracteristique":"LOGO","qty":1,"remise":"--","prix_ht":134.12},
+    {"ref":"H6053","label":"Plaquette avec coupon 2 lignes + logo","label_bold":"Plaquette avec coupon 2 lignes + logo (x 1000)","format":"COUPON","caracteristique":"LOGO","qty":6,"remise":0.05,"prix_ht":127.41},
+    {"ref":"H6053","label":"Plaquette avec coupon 2 lignes + logo","label_bold":"Plaquette avec coupon 2 lignes + logo (x 1000)","format":"COUPON","caracteristique":"LOGO","qty":10,"remise":0.08,"prix_ht":123.39},
+    {"ref":"H6053","label":"Plaquette avec coupon 2 lignes + logo","label_bold":"Plaquette avec coupon 2 lignes + logo (x 1000)","format":"COUPON","caracteristique":"LOGO","qty":20,"remise":0.12,"prix_ht":118.02},
+    {"ref":"H6053","label":"Plaquette avec coupon 2 lignes + logo","label_bold":"Plaquette avec coupon 2 lignes + logo (x 1000)","format":"COUPON","caracteristique":"LOGO","qty":30,"remise":0.15,"prix_ht":114},
+    {"ref":"H6053","label":"Plaquette avec coupon 2 lignes + logo","label_bold":"Plaquette avec coupon 2 lignes + logo (x 1000)","format":"COUPON","caracteristique":"LOGO","qty":40,"remise":0.18,"prix_ht":109.98},
+    {"ref":"H6053","label":"Plaquette avec coupon 2 lignes + logo","label_bold":"Plaquette avec coupon 2 lignes + logo (x 1000)","format":"COUPON","caracteristique":"LOGO","qty":50,"remise":0.2,"prix_ht":107.29},
+    {"ref":"H6053","label":"Plaquette avec coupon 2 lignes + logo","label_bold":"Plaquette avec coupon 2 lignes + logo (x 1000)","format":"COUPON","caracteristique":"LOGO","qty":100,"remise":0.27,"prix_ht":97.91},
+    {"ref":"H6084","label":"Plaquette jusqu'à 4 lignes","label_bold":"Plaquette jusqu'à 4 lignes (x 1000)","format":"Format 33","caracteristique":"ALPHANUMERIQUE","qty":1,"remise":"--","prix_ht":135.41},
+    {"ref":"H6084","label":"Plaquette jusqu'à 4 lignes","label_bold":"Plaquette jusqu'à 4 lignes (x 1000)","format":"Format 33","caracteristique":"ALPHANUMERIQUE","qty":6,"remise":0.05,"prix_ht":128.64},
+    {"ref":"H6084","label":"Plaquette jusqu'à 4 lignes","label_bold":"Plaquette jusqu'à 4 lignes (x 1000)","format":"Format 33","caracteristique":"ALPHANUMERIQUE","qty":10,"remise":0.08,"prix_ht":124.58},
+    {"ref":"H6084","label":"Plaquette jusqu'à 4 lignes","label_bold":"Plaquette jusqu'à 4 lignes (x 1000)","format":"Format 33","caracteristique":"ALPHANUMERIQUE","qty":20,"remise":0.12,"prix_ht":119.16},
+    {"ref":"H6084","label":"Plaquette jusqu'à 4 lignes","label_bold":"Plaquette jusqu'à 4 lignes (x 1000)","format":"Format 33","caracteristique":"ALPHANUMERIQUE","qty":30,"remise":0.15,"prix_ht":115.1},
+    {"ref":"H6084","label":"Plaquette jusqu'à 4 lignes","label_bold":"Plaquette jusqu'à 4 lignes (x 1000)","format":"Format 33","caracteristique":"ALPHANUMERIQUE","qty":40,"remise":0.18,"prix_ht":111.03},
+    {"ref":"H6084","label":"Plaquette jusqu'à 4 lignes","label_bold":"Plaquette jusqu'à 4 lignes (x 1000)","format":"Format 33","caracteristique":"ALPHANUMERIQUE","qty":50,"remise":0.2,"prix_ht":108.33},
+    {"ref":"H6084","label":"Plaquette jusqu'à 4 lignes","label_bold":"Plaquette jusqu'à 4 lignes (x 1000)","format":"Format 33","caracteristique":"ALPHANUMERIQUE","qty":100,"remise":0.27,"prix_ht":98.85},
+    {"ref":"H6071","label":"Plaquette 2 lignes + code-barres","label_bold":"Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":1,"remise":"--","prix_ht":134.12},
+    {"ref":"H6071","label":"Plaquette 2 lignes + code-barres","label_bold":"Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":6,"remise":0.05,"prix_ht":127.41},
+    {"ref":"H6071","label":"Plaquette 2 lignes + code-barres","label_bold":"Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":10,"remise":0.08,"prix_ht":123.39},
+    {"ref":"H6071","label":"Plaquette 2 lignes + code-barres","label_bold":"Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":20,"remise":0.12,"prix_ht":118.02},
+    {"ref":"H6071","label":"Plaquette 2 lignes + code-barres","label_bold":"Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":30,"remise":0.15,"prix_ht":114},
+    {"ref":"H6071","label":"Plaquette 2 lignes + code-barres","label_bold":"Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":40,"remise":0.18,"prix_ht":109.98},
+    {"ref":"H6071","label":"Plaquette 2 lignes + code-barres","label_bold":"Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":50,"remise":0.2,"prix_ht":107.29},
+    {"ref":"H6071","label":"Plaquette 2 lignes + code-barres","label_bold":"Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":100,"remise":0.27,"prix_ht":97.91},
+    {"ref":"H6072","label":"Plaquette 3 lignes + QRCODE","label_bold":"Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":1,"remise":"--","prix_ht":135.32},
+    {"ref":"H6072","label":"Plaquette 3 lignes + QRCODE","label_bold":"Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":6,"remise":0.05,"prix_ht":128.56},
+    {"ref":"H6072","label":"Plaquette 3 lignes + QRCODE","label_bold":"Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":10,"remise":0.08,"prix_ht":124.5},
+    {"ref":"H6072","label":"Plaquette 3 lignes + QRCODE","label_bold":"Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":20,"remise":0.12,"prix_ht":119.09},
+    {"ref":"H6072","label":"Plaquette 3 lignes + QRCODE","label_bold":"Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":30,"remise":0.15,"prix_ht":115.03},
+    {"ref":"H6072","label":"Plaquette 3 lignes + QRCODE","label_bold":"Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":40,"remise":0.18,"prix_ht":110.97},
+    {"ref":"H6072","label":"Plaquette 3 lignes + QRCODE","label_bold":"Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":50,"remise":0.2,"prix_ht":108.26},
+    {"ref":"H6072","label":"Plaquette 3 lignes + QRCODE","label_bold":"Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":100,"remise":0.27,"prix_ht":98.79},
+    {"ref":"H6076","label":"Plaquette 3 lignes + Logo","label_bold":"Plaquette 3 lignes + Logo (x 1000)","format":"Format 33","caracteristique":"LOGO","qty":1,"remise":"--","prix_ht":134.12},
+    {"ref":"H6076","label":"Plaquette 3 lignes + Logo","label_bold":"Plaquette 3 lignes + Logo (x 1000)","format":"Format 33","caracteristique":"LOGO","qty":6,"remise":0.05,"prix_ht":127.41},
+    {"ref":"H6076","label":"Plaquette 3 lignes + Logo","label_bold":"Plaquette 3 lignes + Logo (x 1000)","format":"Format 33","caracteristique":"LOGO","qty":10,"remise":0.08,"prix_ht":123.39},
+    {"ref":"H6076","label":"Plaquette 3 lignes + Logo","label_bold":"Plaquette 3 lignes + Logo (x 1000)","format":"Format 33","caracteristique":"LOGO","qty":20,"remise":0.12,"prix_ht":118.02},
+    {"ref":"H6076","label":"Plaquette 3 lignes + Logo","label_bold":"Plaquette 3 lignes + Logo (x 1000)","format":"Format 33","caracteristique":"LOGO","qty":30,"remise":0.15,"prix_ht":114},
+    {"ref":"H6076","label":"Plaquette 3 lignes + Logo","label_bold":"Plaquette 3 lignes + Logo (x 1000)","format":"Format 33","caracteristique":"LOGO","qty":40,"remise":0.18,"prix_ht":109.98},
+    {"ref":"H6076","label":"Plaquette 3 lignes + Logo","label_bold":"Plaquette 3 lignes + Logo (x 1000)","format":"Format 33","caracteristique":"LOGO","qty":50,"remise":0.2,"prix_ht":107.29},
+    {"ref":"H6076","label":"Plaquette 3 lignes + Logo","label_bold":"Plaquette 3 lignes + Logo (x 1000)","format":"Format 33","caracteristique":"LOGO","qty":100,"remise":0.27,"prix_ht":97.91}
+  ],
+  "Gamme plaquette BIOTAG": [
+    {"ref":"H6021NBIO","label":"Plaquette 1 ligne + code-barres","label_bold":"[GAME BIOTAG] - Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":1,"remise":"--","prix_ht":125.09},
+    {"ref":"H6021NBIO","label":"Plaquette 1 ligne + code-barres","label_bold":"[GAME BIOTAG] - Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":6,"remise":0.05,"prix_ht":118.83},
+    {"ref":"H6021NBIO","label":"Plaquette 1 ligne + code-barres","label_bold":"[GAME BIOTAG] - Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":10,"remise":0.08,"prix_ht":115.08},
+    {"ref":"H6021NBIO","label":"Plaquette 1 ligne + code-barres","label_bold":"[GAME BIOTAG] - Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":20,"remise":0.12,"prix_ht":110.08},
+    {"ref":"H6021NBIO","label":"Plaquette 1 ligne + code-barres","label_bold":"[GAME BIOTAG] - Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":30,"remise":0.15,"prix_ht":106.32},
+    {"ref":"H6021NBIO","label":"Plaquette 1 ligne + code-barres","label_bold":"[GAME BIOTAG] - Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":40,"remise":0.18,"prix_ht":102.57},
+    {"ref":"H6021NBIO","label":"Plaquette 1 ligne + code-barres","label_bold":"[GAME BIOTAG] - Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":50,"remise":0.2,"prix_ht":100.07},
+    {"ref":"H6021NBIO","label":"Plaquette 1 ligne + code-barres","label_bold":"[GAME BIOTAG] - Plaquette 1 ligne + code-barres (x 1000)","format":"Format 27","caracteristique":"BARCODE","qty":100,"remise":0.27,"prix_ht":91.31},
+    {"ref":"H6051NBIO","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":1,"remise":"--","prix_ht":140.53},
+    {"ref":"H6051NBIO","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":6,"remise":0.05,"prix_ht":133.5},
+    {"ref":"H6051NBIO","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":10,"remise":0.08,"prix_ht":129.29},
+    {"ref":"H6051NBIO","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":20,"remise":0.12,"prix_ht":123.67},
+    {"ref":"H6051NBIO","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":30,"remise":0.15,"prix_ht":119.45},
+    {"ref":"H6051NBIO","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":40,"remise":0.18,"prix_ht":115.23},
+    {"ref":"H6051NBIO","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":50,"remise":0.2,"prix_ht":112.42},
+    {"ref":"H6051NBIO","label":"Plaquette avec coupon 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette avec coupon 2 lignes + code-barres (x 1000)","format":"COUPON","caracteristique":"BARCODE","qty":100,"remise":0.27,"prix_ht":102.59},
+    {"ref":"H6071NBIO","label":"Plaquette 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":1,"remise":"--","prix_ht":140.53},
+    {"ref":"H6071NBIO","label":"Plaquette 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":6,"remise":0.05,"prix_ht":133.5},
+    {"ref":"H6071NBIO","label":"Plaquette 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":10,"remise":0.08,"prix_ht":129.29},
+    {"ref":"H6071NBIO","label":"Plaquette 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":20,"remise":0.12,"prix_ht":123.67},
+    {"ref":"H6071NBIO","label":"Plaquette 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":30,"remise":0.15,"prix_ht":119.45},
+    {"ref":"H6071NBIO","label":"Plaquette 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":40,"remise":0.18,"prix_ht":115.23},
+    {"ref":"H6071NBIO","label":"Plaquette 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":50,"remise":0.2,"prix_ht":112.42},
+    {"ref":"H6071NBIO","label":"Plaquette 2 lignes + code-barres","label_bold":"[GAMME BIOTAG] - Plaquette 2 lignes + code-barres (x 1000)","format":"Format 33","caracteristique":"BARCODE","qty":100,"remise":0.27,"prix_ht":102.59},
+    {"ref":"H6072NBIO","label":"Plaquette 3 lignes + QRCODE","label_bold":"[GAMME BIOTAG] - Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":1,"remise":"--","prix_ht":140.53},
+    {"ref":"H6072NBIO","label":"Plaquette 3 lignes + QRCODE","label_bold":"[GAMME BIOTAG] - Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":6,"remise":0.05,"prix_ht":133.5},
+    {"ref":"H6072NBIO","label":"Plaquette 3 lignes + QRCODE","label_bold":"[GAMME BIOTAG] - Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":10,"remise":0.08,"prix_ht":129.29},
+    {"ref":"H6072NBIO","label":"Plaquette 3 lignes + QRCODE","label_bold":"[GAMME BIOTAG] - Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":20,"remise":0.12,"prix_ht":123.67},
+    {"ref":"H6072NBIO","label":"Plaquette 3 lignes + QRCODE","label_bold":"[GAMME BIOTAG] - Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":30,"remise":0.15,"prix_ht":119.45},
+    {"ref":"H6072NBIO","label":"Plaquette 3 lignes + QRCODE","label_bold":"[GAMME BIOTAG] - Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":40,"remise":0.18,"prix_ht":115.23},
+    {"ref":"H6072NBIO","label":"Plaquette 3 lignes + QRCODE","label_bold":"[GAMME BIOTAG] - Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":50,"remise":0.2,"prix_ht":112.42},
+    {"ref":"H6072NBIO","label":"Plaquette 3 lignes + QRCODE","label_bold":"[GAMME BIOTAG] - Plaquette 3 lignes + QRCODE (x 1000)","format":"Format 33","caracteristique":"QRCODE","qty":100,"remise":0.27,"prix_ht":102.59}
+  ],
+  "Gamme Plot": [
+    {"ref":"H6088","label":"Plot 1 numéro + texte","label_bold":"Plot 1 numéro + texte (x 500)","format":"PLOT","caracteristique":"ALPHANUMERIQUE","qty":1,"remise":"--","prix_ht":74.73},
+    {"ref":"H6088","label":"Plot 1 numéro + texte","label_bold":"Plot 1 numéro + texte (x 500)","format":"PLOT","caracteristique":"ALPHANUMERIQUE","qty":5,"remise":0.03,"prix_ht":72.49},
+    {"ref":"H6088","label":"Plot 1 numéro + texte","label_bold":"Plot 1 numéro + texte (x 500)","format":"PLOT","caracteristique":"ALPHANUMERIQUE","qty":10,"remise":0.05,"prix_ht":70.99},
+    {"ref":"H6090","label":"Plot 1 numéro + texte + code-barres","label_bold":"Plot 1 numéro + texte + code-barres (x 500)","format":"PLOT","caracteristique":"BARCODE","qty":1,"remise":"--","prix_ht":78.16},
+    {"ref":"H6090","label":"Plot 1 numéro + texte + code-barres","label_bold":"Plot 1 numéro + texte + code-barres (x 500)","format":"PLOT","caracteristique":"BARCODE","qty":5,"remise":0.03,"prix_ht":75.82},
+    {"ref":"H6090","label":"Plot 1 numéro + texte + code-barres","label_bold":"Plot 1 numéro + texte + code-barres (x 500)","format":"PLOT","caracteristique":"BARCODE","qty":10,"remise":0.05,"prix_ht":74.25}
+  ]
+};
+
+const UNIVERSES = {
+  standard: "Gamme plaquette standard",
+  biotag: "Gamme plaquette BIOTAG",
+  plot: "Gamme Plot"
+};
+
+const UNIVERS_LABELS = {
+  standard: "Plaquette forestière standard",
+  biotag: "Plaquette qualité papetière (BIOTAG)",
+  plot: "Plot bois scié"
+};
+
+const CARAC_ICONS = {
+  ALPHANUMERIQUE: "🔤",
+  BARCODE: "▌▌▌",
+  LOGO: "◈",
+  QRCODE: "⊞"
+};
+
+const FORMAT_LABELS = {
+  "Format 27": "Format 27 — petite plaquette",
+  "Format 33": "Format 33 — grande plaquette",
+  "COUPON": "Avec coupon détachable",
+  "PLOT": "Plot"
+};
+
+// État
+let state = { univers: null, caracteristique: null, format: null, selectedRefs: [] };
+
+function getDataset() { return DATA[UNIVERSES[state.univers]] || []; }
+
+function unique(arr) { return [...new Set(arr)]; }
+
+function updateProgress(step) {
+  const pct = { 1: 15, 2: 35, 3: 55, 4: 75, result: 100 };
+  document.getElementById('progressFill').style.width = (pct[step] || 0) + '%';
+}
+
+function scrollToStep(id) {
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+function setStepDone(stepEl, recapEl, recapText) {
+  stepEl.classList.remove('active');
+  stepEl.classList.add('done');
+  recapEl.textContent = recapText;
+}
+
+function setStepActive(stepEl) {
+  stepEl.classList.remove('hidden', 'done');
+  stepEl.classList.add('active');
+}
+
+// ====== ÉTAPE 1 ======
+function selectUnivers(val) {
+  state = { univers: val, caracteristique: null, format: null, selectedRefs: [] };
+  selectedGroups = {};
+  setStepDone(document.getElementById('step1'), document.getElementById('recap1'), UNIVERS_LABELS[val]);
+
+  // Réinitialiser les étapes suivantes
+  ['step2','step3','step4'].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.remove('active','done');
+    el.classList.add('hidden');
+  });
+  document.getElementById('resultSection').classList.remove('visible');
+
+  if (val === 'plot') {
+    // Plot : pas d'étape format, on passe direct à caractéristique
+    buildCaracteristiqueStep();
+  } else {
+    buildCaracteristiqueStep();
+  }
+  updateProgress(2);
+}
+
+// ====== ÉTAPE 2 : Caractéristique ======
+function buildCaracteristiqueStep() {
+  const dataset = getDataset();
+  const caracs = unique(dataset.map(r => r.caracteristique)).sort();
+  const container = document.getElementById('caracteristiqueOptions');
+  container.innerHTML = '';
+
+  if (caracs.length === 1) {
+    state.caracteristique = caracs[0];
+    buildFormatStep();
+    return;
+  }
+
+  caracs.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = `<span class="opt-icon">${CARAC_ICONS[c] || '●'}</span><span class="opt-text">${c}</span>`;
+    btn.onclick = () => selectCaracteristique(c);
+    container.appendChild(btn);
+  });
+
+  setStepActive(document.getElementById('step2'));
+  scrollToStep('step2');
+}
+
+function selectCaracteristique(val) {
+  state.caracteristique = val;
+  state.format = null;
+  state.selectedRefs = [];
+  selectedGroups = {};
+  setStepDone(document.getElementById('step2'), document.getElementById('recap2'), val);
+
+  ['step3','step4'].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.remove('active','done');
+    el.classList.add('hidden');
+  });
+  document.getElementById('resultSection').classList.remove('visible');
+
+  if (state.univers === 'plot') {
+    // Plot : format unique PLOT, passe direct au choix des refs
+    state.format = 'PLOT';
+    buildRefStep();
+  } else {
+    buildFormatStep();
+  }
+  updateProgress(3);
+}
+
+// ====== ÉTAPE 3 : Format ======
+function buildFormatStep() {
+  const dataset = getDataset().filter(r => r.caracteristique === state.caracteristique);
+  const formats = unique(dataset.map(r => r.format));
+
+  if (formats.length === 1) {
+    state.format = formats[0];
+    buildRefStep();
+    return;
+  }
+
+  const container = document.getElementById('formatOptions');
+  container.innerHTML = '';
+  formats.forEach(f => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = `<span class="opt-text">${FORMAT_LABELS[f] || f}</span>`;
+    btn.onclick = () => selectFormat(f);
+    container.appendChild(btn);
+  });
+
+  setStepActive(document.getElementById('step3'));
+  scrollToStep('step3');
+}
+
+function selectFormat(val) {
+  state.format = val;
+  state.selectedRefs = [];
+  selectedGroups = {};
+  setStepDone(document.getElementById('step3'), document.getElementById('recap3'), FORMAT_LABELS[val] || val);
+
+  const step4 = document.getElementById('step4');
+  step4.classList.remove('active','done');
+  step4.classList.add('hidden');
+  document.getElementById('resultSection').classList.remove('visible');
+
+  buildRefStep();
+  updateProgress(4);
+}
+
+// ====== ÉTAPE 4 : Références (multi-select) ======
+function buildRefStep() {
+  const dataset = getDataset().filter(r =>
+    r.caracteristique === state.caracteristique &&
+    r.format === state.format
+  );
+
+  // Dédoublonnage par LIBELLÉ — règles :
+  // 1. Les refs ECOLINE sont toujours isolées dans leur propre carte (jamais fusionnées)
+  // 2. Les refs non-ECOLINE ayant le même label (col B) sont fusionnées en une seule carte "N tarifs"
+  const byLabel = {};
+  // Dédoublonner par ref d'abord
+  const seenRef = new Set();
+  const uniqueRows = [];
+  dataset.forEach(r => {
+    if (!seenRef.has(r.ref)) { seenRef.add(r.ref); uniqueRows.push(r); }
+  });
+
+  uniqueRows.forEach(r => {
+    const isEcoline = r.label_bold.includes('ECOLINE');
+    // ECOLINE : clé unique = la ref elle-même (jamais fusionnée)
+    // Autres : clé = label nettoyé
+    const key = isEcoline
+      ? '__ecoline__' + r.ref
+      : r.label.trim();
+
+    if (!byLabel[key]) {
+      const cleanLabel = r.label_bold.replace(/^\[.*?\]\s*-\s*/, '').trim();
+      byLabel[key] = { cleanLabel, label: r.label, refs: [], isEcoline, label_bold: r.label_bold };
+    }
+    byLabel[key].refs.push(r.ref);
+  });
+
+  const groups = Object.values(byLabel);
+
+  // Auto-sélection si un seul groupe
+  if (groups.length === 1) {
+    state.selectedRefs = groups[0].refs;
+    showResults();
+    return;
+  }
+
+  // Trier : H en premier, U/ECOLINE à la fin
+  groups.sort((a, b) => {
+    const aEco = a.isEcoline ? 1 : 0;
+    const bEco = b.isEcoline ? 1 : 0;
+    if (aEco !== bEco) return aEco - bEco;
+    const aH = a.refs[0]?.startsWith('H') ? 0 : 1;
+    const bH = b.refs[0]?.startsWith('H') ? 0 : 1;
+    return aH - bH;
+  });
+
+  const normalGroups = groups.filter(g => !g.isEcoline);
+  const ecolineGroups = groups.filter(g => g.isEcoline);
+
+  const container = document.getElementById('refOptions');
+  container.innerHTML = '';
+  container.className = 'ref-options-grid';
+
+  // Cartes normales directement dans la grille
+  normalGroups.forEach(g => {
+    const key = g.refs.join('|');
+    const btn = document.createElement('button');
+    btn.className = 'option-btn multi';
+    btn.id = 'refgrp-' + key;
+    btn.dataset.key = key;
+    btn.onclick = () => toggleRefGroup(key, g.refs);
+    const displayLabel = g.refs.length > 1 ? g.label + ' (x 1000)' : g.cleanLabel;
+    const tarifs = g.refs.length > 1 ? `<div class="multi-tarif-badge">● ${g.refs.length} tarifs disponibles</div>` : '';
+    btn.innerHTML = `
+      <span class="opt-text">${displayLabel}${tarifs}</span>
+      <span class="option-check">✓</span>
+    `;
+    container.appendChild(btn);
+  });
+
+  // Cartes ECOLINE en dernier, fond distinct
+  ecolineGroups.forEach(g => {
+    const key = g.refs.join('|');
+    const btn = document.createElement('button');
+    btn.className = 'option-btn multi ecoline';
+    btn.id = 'refgrp-' + key;
+    btn.dataset.key = key;
+    btn.onclick = () => toggleRefGroup(key, g.refs);
+    const tarifs = g.refs.length > 1 ? `<div class="multi-tarif-badge">● ${g.refs.length} tarifs disponibles</div>` : '';
+    btn.innerHTML = `
+      <span class="opt-text">
+        ${g.cleanLabel}
+        <div class="ecoline-badge">⭐ Offre économique</div>
+        ${tarifs}
+      </span>
+      <span class="option-check">✓</span>
+    `;
+    container.appendChild(btn);
+  });
+
+  document.getElementById('validateBtn').classList.remove('visible');
+  setStepActive(document.getElementById('step4'));
+  scrollToStep('step4');
+  updateProgress(4);
+}
+
+// state.selectedRefs stocke maintenant des tableaux aplatis de refs
+// On gère avec un Map clé→refs[]
+let selectedGroups = {}; // key → refs[]
+
+function toggleRefGroup(key, refs) {
+  const btn = document.getElementById('refgrp-' + key);
+  if (selectedGroups[key]) {
+    delete selectedGroups[key];
+    btn.classList.remove('selected');
+  } else {
+    selectedGroups[key] = refs;
+    btn.classList.add('selected');
+  }
+  // Aplatir toutes les refs sélectionnées
+  state.selectedRefs = Object.values(selectedGroups).flat();
+
+  const validateBtn = document.getElementById('validateBtn');
+  const nbGroupes = Object.keys(selectedGroups).length;
+  if (nbGroupes > 0) {
+    validateBtn.classList.add('visible');
+    validateBtn.textContent = nbGroupes === 1 ? 'Afficher le tarif →' : `Afficher les ${nbGroupes} sélections →`;
+  } else {
+    validateBtn.classList.remove('visible');
+  }
+}
+
+// ====== RÉSULTATS ======
+function showResults() {
+  // Reset selectedGroups si appel auto (ref unique)
+  if (!Object.keys(selectedGroups).length && state.selectedRefs.length) {
+    // appel automatique — on garde state.selectedRefs tel quel
+  }
+
+  const step4 = document.getElementById('step4');
+  if (!step4.classList.contains('hidden') && step4.classList.contains('active')) {
+    const nb = Object.keys(selectedGroups).length || 1;
+    setStepDone(step4, document.getElementById('recap4'), nb + ' référence(s) sélectionnée(s)');
+  }
+
+  updateProgress('result');
+
+  const hasH = state.selectedRefs.some(r => r.startsWith('H'));
+  const hasU = state.selectedRefs.some(r => r.startsWith('U'));
+
+  // Construire l'encart marquage contextuellement
+  const marquageNotice = document.getElementById('marquageNotice');
+  const marquageRow = document.getElementById('marquageRow');
+  marquageRow.innerHTML = '';
+
+  if (hasH || hasU) {
+    marquageNotice.classList.add('visible');
+    if (hasH) {
+      const div = document.createElement('div');
+      div.className = 'marquage-item laser-item' + (!hasU ? ' full-width' : '');
+      div.innerHTML = `<strong><span class="marquage-dot dot-laser"></span>H — MARQUAGE LASER</strong>Gravure dans la matière. Durée de vie du marquage = durée de vie du support.`;
+      marquageRow.appendChild(div);
+    }
+    if (hasU) {
+      const div = document.createElement('div');
+      div.className = 'marquage-item ink-item' + (!hasH ? ' full-width' : '');
+      div.innerHTML = `<strong><span class="marquage-dot dot-ink"></span>U — MARQUAGE JET D'ENCRE</strong>Fine pellicule d'encre en surface. Durée de vie moyenne : 1 à 2 ans selon l'exposition aux UV et aux intempéries.`;
+      marquageRow.appendChild(div);
+    }
+  } else {
+    marquageNotice.classList.remove('visible');
+  }
+
+  const dataset = getDataset();
+  let html = '';
+
+  // Trier les refs sélectionnées : H d'abord, U/ECOLINE à la fin
+  const sortedRefs = [...state.selectedRefs].sort((a, b) => {
+    const aH = a.startsWith('H') ? 0 : 1;
+    const bH = b.startsWith('H') ? 0 : 1;
+    return aH - bH;
+  });
+
+  sortedRefs.forEach(ref => {
+    const rows = dataset.filter(r => r.ref === ref);
+    if (!rows.length) return;
+    const firstRow = rows[0];
+    const isLaser = ref.startsWith('H');
+    const isEcoline = firstRow.label_bold.includes('ECOLINE');
+    const marquageLabel = isLaser ? 'LASER' : "JET D'ENCRE";
+    const groupClass = isLaser ? 'rgt-laser' : 'rgt-ink';
+
+    html += `<div class="result-table-wrap">`;
+    html += `<div class="result-group-title ${groupClass}">
+      ${firstRow.label_bold}
+      <span class="rgt-badge">${marquageLabel}</span>
+      ${isEcoline ? '<span class="rgt-badge" style="background:rgba(200,168,75,0.4)">⭐ ÉCOLINE</span>' : ''}
+    </div>`;
+    html += `<table>
+      <thead>
+        <tr>
+          <th>Référence</th>
+          <th>Libellé</th>
+          <th>Qté</th>
+          <th>Remise</th>
+          <th>Prix H.T.</th>
+        </tr>
+      </thead>
+      <tbody>`;
+
+    rows.forEach(r => {
+      const remiseDisplay = r.remise === '--' ? '--' : (r.remise * 100).toFixed(0) + ' %';
+      html += `<tr>
+        <td class="ref-cell">${r.ref}</td>
+        <td class="label-cell">${r.label}</td>
+        <td class="qty-cell">${r.qty}</td>
+        <td class="remise-cell">${remiseDisplay}</td>
+        <td class="prix-cell">${r.prix_ht.toFixed(2)} €</td>
+      </tr>`;
+    });
+
+    html += `</tbody></table></div>`;
+  });
+
+  document.getElementById('resultContent').innerHTML = html;
+  const rs = document.getElementById('resultSection');
+  rs.classList.add('visible');
+  scrollToStep('resultSection');
+}
+
+// ====== RETOUR ======
+function goBack(step) {
+  if (step === 2) { selectUnivers(state.univers); }
+  else if (step === 3) { selectCaracteristique(state.caracteristique); }
+  else if (step === 4) { selectFormat(state.format); }
+}
+
+// ====== RESET ======
+function resetAll() {
+  state = { univers: null, caracteristique: null, format: null, selectedRefs: [] };
+  selectedGroups = {};
+  ['step2','step3','step4'].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.remove('active','done');
+    el.classList.add('hidden');
+  });
+  const s1 = document.getElementById('step1');
+  s1.classList.remove('done');
+  s1.classList.add('active');
+  document.getElementById('recap1').textContent = '';
+  document.getElementById('resultSection').classList.remove('visible');
+  document.getElementById('progressFill').style.width = '0%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
