@@ -170,7 +170,7 @@
     color: var(--text);
     transition: all 0.18s ease;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
     line-height: 1.4;
   }
@@ -190,6 +190,19 @@
     font-size: 18px;
     flex-shrink: 0;
     margin-top: 1px;
+  }
+  .option-btn .opt-icon img {
+    width: 24px;
+    height: 24px;
+    display: block;
+    opacity: 0.75;
+  }
+  .option-btn:hover .opt-icon img {
+    opacity: 1;
+  }
+  .option-btn.selected .opt-icon img {
+    opacity: 1;
+    filter: brightness(0) invert(1);
   }
   .option-btn .opt-text { flex: 1; }
   .option-btn .opt-sub {
@@ -257,6 +270,31 @@
     border-radius: 20px;
     padding: 2px 8px;
     margin-top: 5px;
+  }
+
+  /* FORMAT BUTTON — image + légende */
+  .option-btn--format {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 16px 16px;
+    gap: 14px;
+  }
+  .format-img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    display: block;
+    opacity: 0.85;
+    transition: opacity 0.18s;
+    mix-blend-mode: multiply;
+  }
+  .option-btn--format:hover .format-img {
+    opacity: 1;
+  }
+  .option-btn--format.selected .format-img {
+    filter: brightness(0) invert(1);
+    opacity: 1;
   }
 
   /* VALIDATE BTN */
@@ -761,10 +799,10 @@ const UNIVERS_LABELS = {
 };
 
 const CARAC_ICONS = {
-  ALPHANUMERIQUE: "🔤",
-  BARCODE: "▌▌▌",
-  LOGO: "◈",
-  QRCODE: "⊞"
+  ALPHANUMERIQUE: '<img src="images/alphanum.svg" alt="Alphanumérique">',
+  BARCODE: '<img src="images/barcode.svg" alt="Code-barres">',
+  LOGO: '<img src="images/chevron.svg" alt="Logo">',
+  QRCODE: '<img src="images/qrcode.svg" alt="QR Code">'
 };
 
 const FORMAT_LABELS = {
@@ -772,6 +810,20 @@ const FORMAT_LABELS = {
   "Format 33": "Format 33 — grande plaquette",
   "COUPON": "Avec coupon détachable",
   "PLOT": "Plot"
+};
+
+const FORMAT_IMAGES = {
+  standard: {
+    "Format 27": "images/format_27.svg",
+    "Format 33": "images/format_33.svg",
+    "COUPON": "images/format_coupon.svg"
+  },
+  biotag: {
+    "Format 27": "images/PP_format_27.svg",
+    "Format 33": "images/PP_format_33.svg",
+    "COUPON": "images/PP_format_coupon.svg"
+  },
+  plot: {}
 };
 
 // État
@@ -891,8 +943,12 @@ function buildFormatStep() {
   container.innerHTML = '';
   formats.forEach(f => {
     const btn = document.createElement('button');
-    btn.className = 'option-btn';
-    btn.innerHTML = `<span class="opt-text">${FORMAT_LABELS[f] || f}</span>`;
+    const imgSrc = (FORMAT_IMAGES[state.univers] || {})[f] || null;
+    btn.className = 'option-btn' + (imgSrc ? ' option-btn--format' : '');
+    const imgHtml = imgSrc
+      ? `<img class="format-img" src="${imgSrc}" alt="${FORMAT_LABELS[f] || f}">`
+      : '';
+    btn.innerHTML = `${imgHtml}<span class="opt-text">${FORMAT_LABELS[f] || f}</span>`;
     btn.onclick = () => selectFormat(f);
     container.appendChild(btn);
   });
