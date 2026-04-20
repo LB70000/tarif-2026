@@ -463,6 +463,31 @@
     margin-top: 3px;
   }
 
+  /* CTA */
+  .ref-cta-wrap {
+    padding: 12px 16px;
+    border-top: 1px solid var(--border);
+    background: #fafaf8;
+    text-align: right;
+  }
+  .ref-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--green);
+    text-decoration: none;
+    border: 1.5px solid var(--green);
+    border-radius: var(--radius);
+    padding: 7px 16px;
+    transition: all 0.18s;
+  }
+  .ref-cta:hover {
+    background: var(--green);
+    color: white;
+  }
+
   /* FOOTNOTE */
   .footnote {
     margin-top: 32px;
@@ -784,6 +809,18 @@ const DATA = {
     {"ref":"H6090","label":"Plot 1 numéro + texte + code-barres","label_bold":"Plot 1 numéro + texte + code-barres (x 500)","format":"PLOT","caracteristique":"BARCODE","qty":5,"remise":0.03,"prix_ht":75.82},
     {"ref":"H6090","label":"Plot 1 numéro + texte + code-barres","label_bold":"Plot 1 numéro + texte + code-barres (x 500)","format":"PLOT","caracteristique":"BARCODE","qty":10,"remise":0.05,"prix_ht":74.25}
   ]
+};
+
+const TEST_URL = "https://le-besson.com/PLAQUETTES--0002410-vente/";
+const REF_URLS = {
+  U6025: TEST_URL, U6040: TEST_URL,
+  H6025: TEST_URL, H6040: TEST_URL,
+  H6021: TEST_URL, H6024: TEST_URL,
+  H6054: TEST_URL, H6051: TEST_URL, H6053: TEST_URL,
+  H6084: TEST_URL, H6071: TEST_URL, H6072: TEST_URL, H6076: TEST_URL,
+  H6021NBIO: TEST_URL, H6051NBIO: TEST_URL,
+  H6071NBIO: TEST_URL, H6072NBIO: TEST_URL,
+  H6088: TEST_URL, H6090: TEST_URL
 };
 
 const UNIVERSES = {
@@ -1196,7 +1233,11 @@ function showResults() {
       </tr>`;
     });
 
-    html += `</tbody></table></div>`;
+    const ctaUrl = REF_URLS[ref];
+    const ctaHtml = ctaUrl
+      ? `<div class="ref-cta-wrap"><a class="ref-cta" href="${ctaUrl}" target="_blank" rel="noopener">Voir sur le site →</a></div>`
+      : '';
+    html += `</tbody></table>${ctaHtml}</div>`;
   });
 
   document.getElementById('resultContent').innerHTML = html;
