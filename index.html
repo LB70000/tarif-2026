@@ -798,6 +798,13 @@ const UNIVERS_LABELS = {
   plot: "Plot bois scié"
 };
 
+const CARAC_LABELS = {
+  ALPHANUMERIQUE: "ALPHANUMERIQUE",
+  BARCODE: "BARCODE",
+  LOGO: "LOGO",
+  QRCODE: "QRCODE (Format 33)"
+};
+
 const CARAC_ICONS = {
   ALPHANUMERIQUE: '<img src="images/alphanum.svg" alt="Alphanumérique">',
   BARCODE: '<img src="images/barcode.svg" alt="Code-barres">',
@@ -895,7 +902,7 @@ function buildCaracteristiqueStep() {
   caracs.forEach(c => {
     const btn = document.createElement('button');
     btn.className = 'option-btn';
-    btn.innerHTML = `<span class="opt-icon">${CARAC_ICONS[c] || '●'}</span><span class="opt-text">${c}</span>`;
+    btn.innerHTML = `<span class="opt-icon">${CARAC_ICONS[c] || '●'}</span><span class="opt-text">${CARAC_LABELS[c] || c}</span>`;
     btn.onclick = () => selectCaracteristique(c);
     container.appendChild(btn);
   });
